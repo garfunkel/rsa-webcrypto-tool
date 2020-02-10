@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8" />
         <title>RSA Encrypt Text</title>
@@ -18,10 +19,14 @@
         <div class="page">
             <h1>RSA Encrypt Text</h1>
             <p class="header-description">
-                Your keys and data are kept confidential by performing all cryptographic operations in your web browser, using the
+                Your keys and data are kept confidential by performing all cryptographic operations in your web browser,
+                using the
                 <a href="https://www.w3.org/TR/WebCryptoAPI/" target="Web Crypto API">Web Crypto API</a>.
-                JavaScript is left unminified so you can view page source and scrutinize the source code for yourself. Full source code is viewable at:
-                <a href="https://github.com/galehouse5/rsa-webcrypto-tool" target="Source Code">https://github.com/galehouse5/rsa-webcrypto-tool</a>.
+                JavaScript is left unminified so you can view page source and scrutinize the source code for yourself.
+                Full
+                source code is viewable at:
+                <a href="https://github.com/galehouse5/rsa-webcrypto-tool"
+                    target="Source Code">https://github.com/galehouse5/rsa-webcrypto-tool</a>.
             </p>
 
             <div class="field">
@@ -37,9 +42,9 @@
             <button id="button">Encrypt Text</button>
             <div id="message"></div>
 
-            <div class="field">
+            <div class="field" hidden>
                 <label for="encrypted-text">Encrypted Text</label>
-                <textarea id="encrypted-text" rows="10"></textarea>
+                <textarea id="encrypted-text" rows="10" readonly></textarea>
             </div>
         </div>
     </body>
@@ -57,6 +62,7 @@
             var success = function (data) {
                 encryptedText.value = arrayBufferToPem(data, "RSA TEXT");
                 message.innerText = null;
+                encryptedText.parentElement.hidden = false;
                 button.disabled = false;
             };
 
@@ -81,10 +87,13 @@
 
                 var data = new TextEncoder().encode(textToEncrypt.value);
 
+                encryptedText.parentElement.hidden = true;
+
                 rsaEncrypt(data, publicKeyArrayBuffer).then(success, error);
-            }; 
+            };
 
             button.addEventListener("click", process);
         })();
     </script>
+
 </html>

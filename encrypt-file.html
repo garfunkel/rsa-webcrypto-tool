@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8" />
         <title>RSA Encrypt File</title>
@@ -18,10 +19,14 @@
         <div class="page">
             <h1>RSA Encrypt File</h1>
             <p class="header-description">
-                Your keys and data are kept confidential by performing all cryptographic operations in your web browser, using the
+                Your keys and data are kept confidential by performing all cryptographic operations in your web browser,
+                using the
                 <a href="https://www.w3.org/TR/WebCryptoAPI/" target="Web Crypto API">Web Crypto API</a>.
-                JavaScript is left unminified so you can view page source and scrutinize the source code for yourself. Full source code is viewable at:
-                <a href="https://github.com/galehouse5/rsa-webcrypto-tool" target="Source Code">https://github.com/galehouse5/rsa-webcrypto-tool</a>.
+                JavaScript is left unminified so you can view page source and scrutinize the source code for yourself.
+                Full
+                source code is viewable at:
+                <a href="https://github.com/galehouse5/rsa-webcrypto-tool"
+                    target="Source Code">https://github.com/galehouse5/rsa-webcrypto-tool</a>.
             </p>
 
             <div class="field">
@@ -37,7 +42,7 @@
             <button id="button">Encrypt File</button>
             <div id="message"></div>
 
-            <div class="field" style="display: none;">
+            <div class="field" hidden>
                 <label for="encrypted-file">Encrypted File</label>
                 <a id="encrypted-file"></a>
             </div>
@@ -60,7 +65,7 @@
                 encryptedFile.href = window.URL.createObjectURL(new Blob([data]));
                 encryptedFile.download = encryptedFile.innerText
                     = unencryptedFile.name + ".encrypted";
-                encryptedFile.parentNode.style.display = "block";
+                encryptedFile.parentElement.hidden = false;
 
                 message.innerText = null;
                 button.disabled = false;
@@ -85,14 +90,17 @@
                 if (!fileToEncrypt.files.length)
                     return error("You must select a file to encrypt.");
 
+                encryptedFile.parentElement.hidden = true;
+
                 var fileReader = new FileReader();
                 fileReader.onload = function () {
                     rsaEncrypt(this.result, publicKeyArrayBuffer).then(success, error);
                 };
                 fileReader.readAsArrayBuffer(fileToEncrypt.files[0]);
-            }; 
+            };
 
             button.addEventListener("click", process);
         })();
     </script>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8" />
         <title>Generate RSA Keys</title>
@@ -18,23 +19,27 @@
         <div class="page">
             <h1>Generate RSA Keys</h1>
             <p class="header-description">
-                Your keys and data are kept confidential by performing all cryptographic operations in your web browser, using the
+                Your keys and data are kept confidential by performing all cryptographic operations in your web browser,
+                using the
                 <a href="https://www.w3.org/TR/WebCryptoAPI/" target="Web Crypto API">Web Crypto API</a>.
-                JavaScript is left unminified so you can view page source and scrutinize the source code for yourself. Full source code is viewable at:
-                <a href="https://github.com/galehouse5/rsa-webcrypto-tool" target="Source Code">https://github.com/galehouse5/rsa-webcrypto-tool</a>.
+                JavaScript is left unminified, allowing you to view the page source and scrutinise the source code for
+                yourself. Full
+                source code is viewable at:
+                <a href="https://github.com/garfunkel/rsa-webcrypto-tool"
+                    target="Source Code">https://github.com/garfunkel/rsa-webcrypto-tool</a>.
             </p>
 
-            <div class="field">
-                <label for="public-key">RSA Public Key</label>
-                <textarea id="public-key" rows="10"></textarea>
-            </div>
-
-            <div class="field">
-                <label for="private-key">RSA Private Key</label>
-                <textarea id="private-key" rows="10"></textarea>
-            </div>
-
             <button id="button">Generate Keys</button>
+
+            <div class="field" hidden>
+                <label for="public-key">RSA Public Key</label>
+                <textarea id="public-key" rows="10" readonly></textarea>
+            </div>
+
+            <div class="field" hidden>
+                <label for="private-key">RSA Private Key</label>
+                <textarea id="private-key" rows="10" readonly></textarea>
+            </div>
             <div id="message"></div>
         </div>
     </body>
@@ -52,6 +57,10 @@
                 publicKey.value = arrayBufferToPem(keys.publicKeyBuffer, "RSA PUBLIC KEY");
                 privateKey.value = arrayBufferToPem(keys.privateKeyBuffer, "RSA PRIVATE KEY");
                 message.innerText = null;
+
+                publicKey.parentElement.hidden = false;
+                privateKey.parentElement.hidden = false;
+
                 button.disabled = false;
             };
 
@@ -63,6 +72,10 @@
             var process = function () {
                 message.innerText = "Processing...";
                 button.disabled = true;
+
+                publicKey.parentElement.hidden = true;
+                privateKey.parentElement.hidden = true;
+
                 generateRsaKeys().then(success, error);
             };
 
@@ -75,4 +88,5 @@
             window.onbeforeunload = warn;
         })();
     </script>
+
 </html>
