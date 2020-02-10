@@ -62,9 +62,11 @@
 
                 publicKeyDownload.href = window.URL.createObjectURL(new Blob([publicKey.value]));
                 publicKeyDownload.download = "id_rsa.pub";
+                publicKeyDownload.type = "application/octet-stream";
 
                 privateKeyDownload.href = window.URL.createObjectURL(new Blob([privateKey.value]));
                 privateKeyDownload.download = "id_rsa";
+                privateKeyDownload.type = "application/octet-stream";
 
                 publicKey.parentElement.hidden = false;
                 privateKey.parentElement.hidden = false;
