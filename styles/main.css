@@ -25,6 +25,10 @@ input, textarea {
     color: #adadad;
 }
 
+textarea {
+    font-family: monospace;
+}
+
 button, input[type=file] {
     padding: 10px;
     font-size: 20px;
