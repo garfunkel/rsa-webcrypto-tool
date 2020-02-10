@@ -32,12 +32,12 @@
             <button id="button">Generate Keys</button>
 
             <div class="field" hidden>
-                <label for="public-key">RSA Public Key</label>
+                <label for="public-key">RSA Public Key (<a id="public-key-download">download</a>)</label>
                 <textarea id="public-key" rows="10" readonly></textarea>
             </div>
 
             <div class="field" hidden>
-                <label for="private-key">RSA Private Key</label>
+                <label for="private-key">RSA Private Key (<a id="private-key-download">download</a>)</label>
                 <textarea id="private-key" rows="10" readonly></textarea>
             </div>
             <div id="message"></div>
@@ -52,11 +52,19 @@
             var privateKey = document.getElementById("private-key");
             var button = document.getElementById("button");
             var message = document.getElementById("message");
+            var publicKeyDownload = document.getElementById("public-key-download");
+            var privateKeyDownload = document.getElementById("private-key-download");
 
             var success = function (keys) {
                 publicKey.value = arrayBufferToPem(keys.publicKeyBuffer, "RSA PUBLIC KEY");
                 privateKey.value = arrayBufferToPem(keys.privateKeyBuffer, "RSA PRIVATE KEY");
                 message.innerText = null;
+
+                publicKeyDownload.href = window.URL.createObjectURL(new Blob([publicKey.value]));
+                publicKeyDownload.download = "id_rsa.pub";
+
+                privateKeyDownload.href = window.URL.createObjectURL(new Blob([privateKey.value]));
+                privateKeyDownload.download = "id_rsa";
 
                 publicKey.parentElement.hidden = false;
                 privateKey.parentElement.hidden = false;
