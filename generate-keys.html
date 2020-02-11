@@ -60,11 +60,11 @@
                 privateKey.value = arrayBufferToPem(keys.privateKeyBuffer, "RSA PRIVATE KEY");
                 message.innerText = null;
 
-                publicKeyDownload.href = window.URL.createObjectURL(new Blob([publicKey.value]));
+                publicKeyDownload.href = window.URL.createObjectURL(new Blob([publicKey.value], { type: "application/octet-stream" }));
                 publicKeyDownload.download = "id_rsa.pub";
                 publicKeyDownload.type = "application/octet-stream";
 
-                privateKeyDownload.href = window.URL.createObjectURL(new Blob([privateKey.value]));
+                privateKeyDownload.href = window.URL.createObjectURL(new Blob([privateKey.value], { type: "application/octet-stream" }));
                 privateKeyDownload.download = "id_rsa";
                 privateKeyDownload.type = "application/octet-stream";
 
